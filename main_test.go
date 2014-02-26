@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func fact(n int) int {
+func fact(n int64) int64 {
 	if n == 0 {
 		return 1
 	} else {
@@ -23,7 +23,7 @@ var lispFact = `
 var use Atom
 
 func init() {
-	f, err := parser.Parse(strings.NewReader(lispFact))
+	f, err := Parser.Parse(strings.NewReader(lispFact))
 	if err != nil {
 		panic(err)
 	}
@@ -35,8 +35,13 @@ func init() {
 
 func TestFactsAgree(t *testing.T) {
 	a := fact(10)
-	b := eval(use, global_env).(Number)
-	if a != int(b) {
+	tmp, err := eval(use, global_env)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	b := tmp.(Number)
+	if a != int64(b) {
 		t.Errorf("Got: %v Exp: %d", b, a)
 	}
 }
