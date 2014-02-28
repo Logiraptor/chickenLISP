@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Logiraptor/chickenVM/peg"
+	"github.com/Logiraptor/chicken/peg"
 )
 
 var QUOTE Symbol = "quote"
